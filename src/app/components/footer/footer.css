@@ -10,3 +10,7 @@ footer {
     justify-content: space-between;
     align-items: center;
 }
+.button {
+    padding: 1vw;
+    text-decoration: none;
+}
