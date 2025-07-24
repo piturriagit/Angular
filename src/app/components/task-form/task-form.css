@@ -1,0 +1,17 @@
+form {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+form > * {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 2em;
+    padding: 1em;
+}
+textarea, input {
+    min-height: 1em;
+}
+textarea {
+}
