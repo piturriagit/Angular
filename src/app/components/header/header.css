@@ -1,0 +1,22 @@
+header {
+    grid-area: header;
+    padding: 0 3vw;
+    height:100%;
+    background-color: DodgerBlue;
+    color: white;
+    border-radius: 2em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    align-items: center;
+    gap: 2em;
+}
+.title {
+
+}

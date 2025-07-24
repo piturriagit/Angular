@@ -1,0 +1,12 @@
+footer {
+    grid-area: footer;
+    padding: 0 3vw;
+    height:100%;
+    background-color: DodgerBlue;
+    color: white;
+    border-radius: 2em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}

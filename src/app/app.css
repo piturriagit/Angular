@@ -1,0 +1,19 @@
+div {
+    display: grid;
+    grid-template-areas: 
+        "header"
+        "main"
+        "footer"
+        "router"    /* <app-router> is the forth eleemnt, so height=0 */
+        ;
+    grid-template-rows: 4em auto 2em 0;
+    grid-template-columns: auto;
+    height:100%;
+}
+main {
+    grid-area: main;
+    margin: 2vw 0;
+    padding: 1vw 3vw;
+    background-color: rgb(217, 217, 217);
+    border-radius: 2em;
+}
