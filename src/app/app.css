@@ -14,6 +14,5 @@ main {
     grid-area: main;
     margin: 2vw 0;
     padding: 1vw 3vw;
-    background-color: rgb(217, 217, 217);
     border-radius: 2em;
 }

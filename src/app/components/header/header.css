@@ -2,8 +2,9 @@ header {
     grid-area: header;
     padding: 0 3vw;
     height:100%;
-    background-color: DodgerBlue;
-    color: white;
+    background-color: var(--primary-color);
+    color: var(--background-color);
+    opacity: 0.8;
     border-radius: 2em;
     display: flex;
     flex-direction: row;
@@ -17,6 +18,10 @@ nav {
     align-items: center;
     gap: 2em;
 }
-.title {
-
+a {
+    color: var(--background-color);
+    text-decoration: none;
+}
+a:hover {
+    color: var(--danger-color);
 }

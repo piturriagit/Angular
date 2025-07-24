@@ -1,0 +1,12 @@
+.board {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:start;
+    align-items: baseline;
+    padding: 1em;
+    gap: 1em;
+    background-color: yellow;
+}
+div > div {
+    width: 30%;
+}

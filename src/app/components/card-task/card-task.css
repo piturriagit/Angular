@@ -1,0 +1,19 @@
+.card {
+    min-height: 1em;
+    border-style: solid;
+    border-width: 0.2em;
+    border-color: var(--primary-color);
+    border-radius: 2em;
+    padding: 1em;
+    background-color: var(--background-color);
+    padding:1em;
+}
+.expired {
+    color: var(--danger-color);
+}
+.button {
+    height: 2em;
+    width: 2em;
+    border-style: none;
+    background-color: initial;
+}
