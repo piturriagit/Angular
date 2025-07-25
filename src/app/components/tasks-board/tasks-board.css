@@ -26,3 +26,8 @@
 .expired {
     color: var(--danger-color);
 }
+.loading {
+    width: 100%;
+    text-align: center;
+    font-size: larger;
+}

@@ -1,9 +1,13 @@
 <div class="container">
-    @for ( task of tasksList() ; track task.id ) {
-        <div class="card">
-            <h3 class="title">{{ task.id }} - {{ task.title }}</h3>
-            <p class="details">{{ task.description }}</p>
-            <p class="date">{{ task.creationDate | date:'dd/MMM/yyyy' }}</p>
-        </div>
+    @if ( ! tasksList().length ) {
+        <p class="loading">Loading...</p>
+    } @else {
+        @for ( task of tasksList() ; track task.id ) {
+            <div class="card">
+                <h3 class="title">{{ task.id }} - {{ task.title }}</h3>
+                <p class="details">{{ task.description }}</p>
+                <p class="date">{{ task.creationDate | date:'dd/MMM/yyyy' }}</p>
+            </div>
+        }
     }
 </div>
