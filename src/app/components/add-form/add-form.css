@@ -8,9 +8,8 @@
     gap:1em;
 }
 .floating{
-    position: relative;
-    top:0;
-    left:0;
+    position: fixed;
+    top:5em;
     z-index: 1;
     width: 80%;
     background-color: var(--secondary-color);
