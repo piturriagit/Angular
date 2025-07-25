@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { TaskForm } from "../task-form/task-form";
 
 @Component({
@@ -8,5 +8,4 @@ import { TaskForm } from "../task-form/task-form";
   styleUrl: './new-task.css'
 })
 export class NewTask {
-
 }

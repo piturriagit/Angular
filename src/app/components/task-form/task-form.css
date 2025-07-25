@@ -22,9 +22,3 @@ textarea, input {
     padding: 1em;
     background-color: var(--background-color);
 }
-.button {
-    height: 4em;
-    width: 4em;
-    border-style: none;
-    background-color: initial;
-}

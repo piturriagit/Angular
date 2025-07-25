@@ -1,5 +1,4 @@
-.new {
-    margin:0 auto;
+.container {
     display: flex;
     flex-direction: row;
     justify-content: left;

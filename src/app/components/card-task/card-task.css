@@ -1,4 +1,8 @@
-.card {
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     min-height: 1em;
     border-style: solid;
     border-width: 0.2em;
@@ -8,12 +12,13 @@
     background-color: var(--background-color);
     padding:1em;
 }
+.details {
+    width: 80%;
+}
+.date {
+    text-align: right;
+    font-size: smaller;
+}
 .expired {
     color: var(--danger-color);
-}
-.button {
-    height: 2em;
-    width: 2em;
-    border-style: none;
-    background-color: initial;
 }
