@@ -1,0 +1,5 @@
+<li class="card">
+    <h3 class="title">{{ task().id }} - {{ task().title }}</h3>
+    <p class="details">{{ task().description }}</p>
+    <p class="date" appdateexpired >{{ task().creationDate | date:'dd/MMM/yyyy' }}</p>
+</li>

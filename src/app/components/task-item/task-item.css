@@ -1,0 +1,21 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    border-style: solid;
+    border-width: 0.2em;
+    border-color: var(--primary-color);
+    border-radius: 2em;
+    margin: 1em;;
+    padding: 1em;
+    background-color: var(--background-color);
+    height: 5em;
+    width: 100%;
+}
+
+.date {
+    text-align: right;
+    font-size: smaller;
+}
+.expired {
+    color: var(--danger-color);
+}
