@@ -2,10 +2,11 @@ import { Component, signal } from '@angular/core';
 import { TaskForm } from "../components/task-form/task-form";
 import { RouterLink } from '@angular/router';
 import { ImageIcon } from '../components/image-icon/image-icon';
+import { Form } from '../components/form/form';
 
 @Component({
   selector: 'app-edit',
-  imports: [TaskForm,ImageIcon,RouterLink],
+  imports: [Form,RouterLink],
   templateUrl: './edit.html',
   styleUrl: './edit.css'
 })

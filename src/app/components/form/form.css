@@ -1,0 +1,31 @@
+/* .ng-valid[required], .ng-valid.required  {
+} */
+.ng-invalid:not(form)  {
+    background-color: #fed3d3;
+    border: 1px solid #a94442; /* red */
+}
+.message {
+    display: inline;
+    font-size: 0.5em;
+}
+.error {
+    color: #820000;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+.form-group {
+  margin-bottom: 1rem;
+}
+label {
+  display: block;
+  margin-bottom: .5rem;
+}
+select {
+  width: 100%;
+  padding: .5rem;
+}
+button {
+    background-color: transparent;
+    border-style: none;
+    cursor: pointer;
+}
