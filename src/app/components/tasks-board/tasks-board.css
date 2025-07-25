@@ -1,5 +1,16 @@
 .container {
     background-color: yellow;
+    display: column;
+    justify-content: start;
+    align-items: center;
+    gap: 1em;
+}
+.loading {
+    width: 100%;
+    text-align: center;
+    font-size: larger;
+}
+ul {
     display: flex;
     flex-wrap: wrap;
     justify-content: start;
@@ -7,8 +18,12 @@
     gap: 1em;
     padding: 0 1em;
 }
-.loading {
-    width: 100%;
-    text-align: center;
-    font-size: larger;
+.searchBar {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    height: 2em;
+    padding: 0 1em;
+    gap:1em;
 }

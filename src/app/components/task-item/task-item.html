@@ -1,5 +1,15 @@
-<li class="card">
-    <h3 class="title">{{ task().id }} - {{ task().title }}</h3>
-    <p class="details">{{ task().description }}</p>
-    <p class="date" appdateexpired >{{ task().creationDate | date:'dd/MMM/yyyy' }}</p>
+<li class="content">
+    <div class="card">
+        <h3 class="title">{{ task().id }} - {{ task().title }}</h3>
+        <p class="details">{{ task().description }}</p>
+        <p class="date" appdateexpired >{{ task().creationDate | date:'dd/MMM/yyyy' }}</p>
+    </div>
+    <div class="buttons">
+        <button (click)="editTask()">
+            <app-image-icon [imageSrc]="buttonEdit()" />
+        </button>
+        <button (click)="deleteTask()">
+            <app-image-icon [imageSrc]="buttonDelete()" />
+        </button>
+    </div>
 </li>

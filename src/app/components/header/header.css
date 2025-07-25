@@ -5,7 +5,7 @@
     padding: 0 3em;
     background-color: var(--primary-color);
     color: var(--background-color);
-    opacity: 0.8;
+    opacity: var(--opacity);
     border-style: solid;
     border-color: var(--danger-color);
     border-width: 0.2em;

@@ -11,4 +11,8 @@ export class TasksService {
     const url = `http://localhost:8080/tasks`;  //Enable CORS in backend if different ip:port!!
     return this.http.get<Array<Task>>(url);
   }
+  postTaskFromApi(task:Task) {
+    const url = `http://localhost:8080/tasks`;  //Enable CORS in backend if different ip:port!!
+    return this.http.post<Array<Task>>(url, task);
+  }
 }

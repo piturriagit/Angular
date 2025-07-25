@@ -11,4 +11,10 @@ import { Footer } from "./components/footer/footer";
 })
 export class App {
   protected readonly title = signal('Tasks Manager');
+  today = signal(new Date('2025/07/29'));
+  constructor() {
+    setInterval(()=>{
+      this.today.set(new Date());
+    }, 1000 * 3600);
+  }
 }
