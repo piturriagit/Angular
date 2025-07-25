@@ -1,5 +1,5 @@
 <div class="container">
-    @if ( ! tasksList().length ) {
+    @if( ! tasksList().length ) {
         <p class="loading">Loading...</p>
     } @else {
         @for ( task of tasksList() ; track task.id ) {

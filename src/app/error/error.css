@@ -1,0 +1,22 @@
+.container {
+    background-color: red;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: 3em;
+}
+img {
+    object-fit: cover;
+    height:5em;
+}
+.title {
+    font-size: 1em;
+    padding: 1em;
+}
+.message {
+    font-size: 0.5em;
+}
+.contact {
+    font-size: 0.1em;
+}

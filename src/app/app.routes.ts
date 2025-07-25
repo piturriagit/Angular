@@ -15,5 +15,12 @@ export const routes: Routes = [
             return import('./edit/edit')
             .then(m => m.Edit);
         }
+    }, 
+    {
+        path: 'error',
+        loadComponent: () => {
+            return import('./error/error')
+            .then(m => m.Error);
+        }
     }
 ];
