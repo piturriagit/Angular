@@ -1,0 +1,16 @@
+<div class="container">
+    <button (click)="changeVisibility()">
+        <app-image-icon [imageSrc]="buttonAdd()" />
+    </button>
+    @if (visible()) {
+        <div class="floating">
+            <app-task-form />
+            <button (click)="newTask()">
+                <app-image-icon [imageSrc]="buttonOk()" />
+            </button>
+            <button (click)="changeVisibility()">
+                <app-image-icon [imageSrc]="buttonCancel()" />
+            </button>
+        </div>
+    }
+</div>

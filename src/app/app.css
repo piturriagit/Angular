@@ -1,0 +1,24 @@
+.container {
+    display: grid;
+    grid-template-areas: 
+    'header'
+    'main'
+    'footer'
+    ;
+    grid-template-rows: 4em auto 1.5em;
+    height: 100%;
+}
+header {
+    grid-area: header;
+    position: sticky;
+    top:0;
+}
+main {
+    grid-area: main;
+    
+}
+footer {
+    grid-area: footer;
+    position: sticky;
+    bottom:0;
+}

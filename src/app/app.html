@@ -1,4 +1,12 @@
-<app-header [title]="title()" />
-<app-home />
-<app-footer />
+<div class="container">
+    <header>
+    <app-header [title]="title()" />
+  </header>
+  <main>
+    <app-home />
+  </main>
+  <footer>
+    <app-footer />
+  </footer>
+</div>
 <router-outlet />
