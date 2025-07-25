@@ -18,5 +18,6 @@ export class AddForm {
   }
   newTask() {
     console.log("Calling post tasks api...");
+    this.visible.update( visible => !visible);
   }
 }

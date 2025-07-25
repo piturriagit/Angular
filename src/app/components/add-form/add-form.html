@@ -5,12 +5,14 @@
     @if (visible()) {
         <div class="floating">
             <app-task-form />
-            <button (click)="newTask()">
-                <app-image-icon [imageSrc]="buttonOk()" />
-            </button>
-            <button (click)="changeVisibility()">
-                <app-image-icon [imageSrc]="buttonCancel()" />
-            </button>
+            <div class="buttons">
+                <button (click)="newTask()">
+                    <app-image-icon [imageSrc]="buttonOk()" />
+                </button>
+                <button (click)="changeVisibility()">
+                    <app-image-icon [imageSrc]="buttonCancel()" />
+                </button>
+            </div>
         </div>
     }
 </div>

@@ -9,3 +9,6 @@
     align-items: start;
     background-color: greenyellow;
 }
+h1 {
+    cursor: pointer;
+}
