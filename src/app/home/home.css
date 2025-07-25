@@ -1,3 +1,9 @@
 .container {
     background-color: yellow;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: left;
+    gap: 0.5em;
+    padding: 1em 0;
 }
