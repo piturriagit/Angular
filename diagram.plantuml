@@ -1,0 +1,36 @@
+@startuml
+
+class App
+package app <<folder>> {
+package components <<folder>> {
+class Header
+class Footer
+class NewTask
+class TaskForm
+class TaskBoard
+class CardTask
+class ButtonsPanel
+}
+package services <<folder>> {
+}
+class Home
+class FormView
+}
+
+App --> Header
+App --> Home
+Home --> NewTask
+NewTask --> TaskForm
+TaskForm --> ButtonsPanel
+Home --> TaskBoard
+TaskBoard --> CardTask
+CardTask --> ButtonsPanel
+App --> Footer
+Footer --> ButtonsPanel
+
+class AppComponent
+class HeaderComponent
+class HomeComponent
+AppComponent --> HeaderComponent
+AppComponent --> HomeComponent
+@enduml
