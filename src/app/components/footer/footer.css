@@ -16,3 +16,10 @@
     justify-content: space-between;
     align-items: center;
 }
+.button {
+    padding: 1vw;
+    text-decoration: none;
+}
+.button > img {
+    height: 1.5vw;
+}

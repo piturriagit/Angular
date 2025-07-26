@@ -1,3 +1,11 @@
 <div class="container">
-    <p>{{ today() | date:"dd/MMM/yyyy ss" }}</p>
+    <p>Created by {{author() }} ©{{ today() | date:'yyyy'}} All Rights Reserved</p>
+    <div>
+        <a class="button" href="{{ authorContact() }}">
+            <app-image-icon [imageSrc]="imageMail()"/>
+        </a>
+        <a class="button" href="{{ authorLinkedin()}}">
+            <app-image-icon [imageSrc]="imageLinkedin()"/>
+        </a>
+    </div>
 </div>

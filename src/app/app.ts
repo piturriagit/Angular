@@ -11,10 +11,14 @@ import { Footer } from "./components/footer/footer";
 })
 export class App {
   protected readonly appName = signal('My Tasks');
+  protected readonly author = signal('piturria');
+  protected readonly authorContact = signal('mailto:patricia.iturriaganez@gmail.com?subject=Task%20Manager%20-%20');
+  protected readonly authorLinkedin = signal('https://www.linkedin.com/in/patricia-iturriaga-n%C3%BA%C3%B1ez-726258134/');
+  
   today = signal(new Date('2025/07/29'));
   constructor() {
     setInterval(()=>{
       this.today.set(new Date());
-    }, 1000 * 3600);
+    }, 1000 * 3600);    //updated every hour
   }
 }

@@ -7,18 +7,18 @@
          @if(isFormVisible()) {
             <form [formGroup]="form">
                 @if (task.id != 0) {
-                    <label>ID <span class="error">*</span></label>
+                    <label>ID <span class="warning error">*</span></label>
                     <input type="text" formControlName="id"
-                        [(ngModel)]="task.id" name="id"
-                        required>    
+                        [(ngModel)]="task.id" name="id">    
                 }
-                <label>Title <span class="error">*</span></label>
+                <label>Title <span class="warning"><span class="error">*</span> ({{ maxChars() - task.title.length }} chars left)</span></label>
                 <input type="text" formControlName="title"
                     [(ngModel)]="task.title" name="title"
-                    required minlength="{{ minChars() }}">
-                <label>Description</label>
+                    maxlength="{{ maxChars() }}">
+                <label>Description<span class="warning"> ({{ maxChars() - task.description.length }}) chars left</span></label>
                 <input type="text" formControlName="description"
-                    [(ngModel)]="task.description" name="description">
+                    [(ngModel)]="task.description" name="description"
+                    maxlength="{{ maxChars() }}">
                 <div>
                     @if(form.controls['title'].errors?.['required'] && form.controls['title'].touched && form.controls['title'].dirty) {
                         <span class="error">Title is required</span>
@@ -26,7 +26,7 @@
                         <span class="error">Title requires min of {{ minChars() }} chars</span>
                     }
                 </div>
-                <div class="actions-vertical">
+                <div class="actions-horizontal">
                     @if (task.id == 0) {
                         <button type="submit" class="tooltip" name="add" 
                             (click)="addTask()" [disabled]="form.invalid">
@@ -68,9 +68,9 @@
                 @for ( task of tasksList ; track task.id ) {
                     <li class="card">
                         <div class="content">
-                            <h3 class="title">{{ task.id }} - {{ task.title }}</h3>
+                            <p class="title">{{ task.title }}</p>
                             <p class="details">{{ task.description }}</p>
-                            <p class="date" appdateexpired >{{ task.creationDate | date:'dd/MMM/yyyy' }}</p>
+                            <p class="date" appdateexpired >{{ task.id }} - {{ task.creationDate | date:'dd/MMM/yyyy' }}</p>
                         </div>
                         <div class="actions-vertical">
                             <button type="button" class="tooltip" name="edit" 

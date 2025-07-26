@@ -30,10 +30,16 @@ export class Home {
   buttonCancel = signal('bt_cancel.png');
 
   minChars = signal(3);
+  maxChars = signal(255); //max on database
   private emptyTask: Task = {id:0, title:"", description:"", creationDate:new Date()};
   form: FormGroup = new FormGroup({
-    id : new FormControl(this.emptyTask.id),
-    title : new FormControl(this.emptyTask.title,[Validators.required,Validators.minLength(this.minChars())]),
+    id : new FormControl(this.emptyTask.id, [
+      Validators.required
+    ]),
+    title : new FormControl(this.emptyTask.title,[
+      Validators.required,
+      Validators.minLength(this.minChars())
+    ]),
     description : new FormControl(this.emptyTask.description),
     creationDate : new FormControl(this.emptyTask.creationDate)
   });
