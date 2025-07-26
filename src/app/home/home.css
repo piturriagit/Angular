@@ -1,5 +1,4 @@
 .container {
-    background-color: yellow;
     display: flex;
     flex-direction: column;
     justify-content: start;
@@ -16,7 +15,6 @@ button {
     gap:1em;
 }
 .top {
-    background-color: magenta;
     display: flex;
     flex-direction: row;
     justify-content: space-between;

@@ -8,5 +8,5 @@ import { RouterLink } from '@angular/router';
   styleUrl: './header.css'
 })
 export class Header {
-  title = input('Default app title');
+  appName = input('Default app title');
 }

@@ -1,9 +1,8 @@
-import { Component, input, signal, Signal } from '@angular/core';
-import { DisableSubmit } from '../../directives/disable-submit';
+import { Component, input } from '@angular/core';
 
 @Component({
   selector: 'app-image-icon',
-  imports: [DisableSubmit],
+  imports: [],
   templateUrl: './image-icon.html',
   styleUrl: './image-icon.css'
 })

@@ -1,0 +1,12 @@
+<div class="container">
+    @if(image()) {<img src="{{ image() }}">}
+    @if(title()) {<div class="title">{{ title() }}</div>}
+    @if(message()) {<div class="message">{{ message() }}</div>}
+    @if(warning()) {
+        @if(link()) {
+            <div class="contact"><a href="{{ link() }}" target="_blank">{{ warning() }}</a></div>
+        } @else {
+            <div class="contact">{{ warning() }}</div>
+        }
+    }
+</div>

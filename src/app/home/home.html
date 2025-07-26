@@ -46,24 +46,30 @@
         </form>
     }
     <div class="task-board">
-        <ul>
-            @for ( task of tasksList ; track task.id ) {
-                <li class="card">
-                    <div class="content">
-                        <h3 class="title">{{ task.id }} - {{ task.title }}</h3>
-                        <p class="details">{{ task.description }}</p>
-                        <p class="date" appdateexpired >{{ task.creationDate | date:'dd/MMM/yyyy' }}</p>
-                    </div>
-                    <div class="actions">
-                        <button type="button" (click)="editThisTask(task)">
-                            <app-image-icon [imageSrc]="buttonEdit()" />Edit
-                        </button>
-                        <button type="button" (click)="deleteThisTask(task)">
-                            <app-image-icon [imageSrc]="buttonDelete()" />Delete
-                        </button>
-                    </div>
-                </li>
+        @if(isLoading()) {
+            <p class="message">Loading...</p>
+        } @else if(tasksList.length == 0) {
+            <p class="message">You are up to date!!!</p>
+        } @else {
+            <ul>
+                @for ( task of tasksList ; track task.id ) {
+                    <li class="card">
+                        <div class="content">
+                            <h3 class="title">{{ task.id }} - {{ task.title }}</h3>
+                            <p class="details">{{ task.description }}</p>
+                            <p class="date" appdateexpired >{{ task.creationDate | date:'dd/MMM/yyyy' }}</p>
+                        </div>
+                        <div class="actions">
+                            <button type="button" (click)="editThisTask(task)">
+                                <app-image-icon [imageSrc]="buttonEdit()" />Edit
+                            </button>
+                            <button type="button" (click)="deleteThisTask(task)">
+                                <app-image-icon [imageSrc]="buttonDelete()" />Delete
+                            </button>
+                        </div>
+                    </li>
+                }
+                </ul>
             }
-            </ul>
     </div>
 </div>

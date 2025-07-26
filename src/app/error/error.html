@@ -1,6 +1,3 @@
 <div class="container">
-    <img src="sorry.png">
-    <div class="title">Looks like {{ title() }} is down</div>
-    <div class="message">Grab a coffee with cookies and check back with us in a bit.</div>
-    <div class="contact">You can also create a <a href="{{ ticket() }}">ticket</a> if you need additional help with this.</div>
+    <app-feedback [image]="image()" [title]="title()" [message]="message()" [warning]="warning()" [link]="ticket()" />
 </div>

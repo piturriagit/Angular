@@ -14,6 +14,7 @@ import { DatePipe } from '@angular/common';
   styleUrl: './home.css'
 })
 export class Home {
+  isLoading = signal(false);
   isFormVisible = signal(false);
   buttonAdd = signal('bt_add.png');
   buttonEdit = signal('bt_edit.png');
@@ -47,6 +48,7 @@ export class Home {
   };
 
   loadTasksList() {
+    this.isLoading.set(true);
     this.service.getTasks()
       .pipe(catchError(error => {
         console.error(`ERROR while GET tasks: ${error}`);
@@ -56,6 +58,7 @@ export class Home {
       .subscribe( (res:any) => {
         this.tasksList=res;
         console.log(`GET tasks: ${res}`);
+        this.isLoading.set(false);
     })
   }
   addTask() {
