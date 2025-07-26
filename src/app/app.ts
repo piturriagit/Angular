@@ -10,7 +10,7 @@ import { Footer } from "./components/footer/footer";
   styleUrl: './app.css'
 })
 export class App {
-  protected readonly appName = signal('Tasks Manager');
+  protected readonly appName = signal('My Tasks');
   today = signal(new Date('2025/07/29'));
   constructor() {
     setInterval(()=>{

@@ -3,7 +3,7 @@
     bottom:0;
     height: 100%;
     padding: 0 3em;
-    background-color: var(--danger-color);
+    background-color: var(--contrast-color);
     color: var(--background-color);
     opacity: var(--opacity);
     border-style: solid;
@@ -15,5 +15,4 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    background-color: orange;
 }

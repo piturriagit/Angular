@@ -1,55 +1,68 @@
 <div class="container">
     <div class="top">
-        <button (click)="newTask()">
-            <app-image-icon [imageSrc]="buttonAdd()" />New task
+        <button class="tooltip" name="new" (click)="newTask()">
+            <app-image-icon [imageSrc]="buttonAdd()" />
+            <span class="tooltiptext">New task</span>
         </button>
-        <button (click)="deleteList()">Remove all tasks<app-image-icon [imageSrc]="buttonDeleteAll()" />
+         @if(isFormVisible()) {
+            <form [formGroup]="form">
+                @if (task.id != 0) {
+                    <label>ID <span class="error">*</span></label>
+                    <input type="text" formControlName="id"
+                        [(ngModel)]="task.id" name="id"
+                        required>    
+                }
+                <label>Title <span class="error">*</span></label>
+                <input type="text" formControlName="title"
+                    [(ngModel)]="task.title" name="title"
+                    required minlength="{{ minChars() }}">
+                <label>Description</label>
+                <input type="text" formControlName="description"
+                    [(ngModel)]="task.description" name="description">
+                <div>
+                    @if(form.controls['title'].errors?.['required'] && form.controls['title'].touched && form.controls['title'].dirty) {
+                        <span class="error">Title is required</span>
+                    } @else if(form.controls['title'].errors?.['minlength']) {
+                        <span class="error">Title requires min of {{ minChars() }} chars</span>
+                    }
+                </div>
+                <div class="actions-vertical">
+                    @if (task.id == 0) {
+                        <button type="submit" class="tooltip" name="add" 
+                            (click)="addTask()" [disabled]="form.invalid">
+                            <app-image-icon [imageSrc]="buttonSave()" />
+                            <span class="tooltiptext">Save new task</span>
+                        </button>
+                        <button type="reset" class="tooltip" name="reset" 
+                            (click)="resetTaks()">
+                            <app-image-icon [imageSrc]="buttonReset()" />
+                            <span class="tooltiptext">Reset form</span>
+                        </button>
+                    } @else {
+                        <button type="submit" class="tooltip" name="update" 
+                            (click)="updateTask()" [disabled]="form.invalid">
+                            <app-image-icon [imageSrc]="buttonSave()" />
+                            <span class="tooltiptext">Update task</span>
+                        </button>
+                    }
+                    <button type="button" class="tooltip" name="cancel" 
+                        (click)="cancel()">
+                        <app-image-icon [imageSrc]="buttonCancel()" />
+                        <span class="tooltiptext">Close</span>
+                    </button>
+                </div>
+            </form>
+        }
+        <button name="clean" class="tooltip" (click)="deleteList()">
+            <app-image-icon [imageSrc]="buttonDeleteAll()" />
+            <span class="tooltiptext">Delete all tasks!!</span>
         </button>
     </div>
-    @if(isFormVisible()) {
-        <form [formGroup]="form">
-            @if (task.id != 0) {
-                <label>ID <span class="danger">*</span></label>
-                <input type="text" formControlName="id"
-                    [(ngModel)]="task.id" name="id"
-                    required>    
-            }
-            <label>Title <span class="danger">*</span></label>
-            <input type="text" formControlName="title"
-                [(ngModel)]="task.title" name="title"
-                required minlength="{{ minChars() }}">
-            <label>Description</label>
-            <input type="text" formControlName="description"
-                [(ngModel)]="task.description" name="description">
-            <div class="danger">
-                @if(form.controls['title'].errors?.['required'] && form.controls['title'].touched && form.controls['title'].dirty) {
-                    <span>Title is required</span>
-                } @else if(form.controls['title'].errors?.['minlength']) {
-                    <span>Title requires min of {{ minChars() }} chars</span>
-                }
-            </div>
-            @if (task.id == 0) {
-                <button type="submit" (click)="addTask()"
-                    [disabled]="form.invalid">
-                    <app-image-icon [imageSrc]="buttonSave()" />Add
-                </button>
-                <button type="reset" (click)="resetTaks()">
-                    <app-image-icon [imageSrc]="buttonReset()" />Reset
-                </button>
-            } @else {
-                <button type="submit" (click)="updateTask()"
-                    [disabled]="form.invalid"><app-image-icon [imageSrc]="buttonSave()" />Update</button>
-            }
-            <button type="button" (click)="cancel()">
-                <app-image-icon [imageSrc]="buttonCancel()" />Cancel
-            </button>
-        </form>
-    }
     <div class="task-board">
         @if(isLoading()) {
-            <p class="message">Loading...</p>
+            <app-feedback [image]="loadingImage()" [title]="loadingMessage()"/>
         } @else if(tasksList.length == 0) {
-            <p class="message">You are up to date!!!</p>
+            <app-feedback [image]="nolistImage()" [title]="nolistMessage()" />
         } @else {
             <ul>
                 @for ( task of tasksList ; track task.id ) {
@@ -59,12 +72,16 @@
                             <p class="details">{{ task.description }}</p>
                             <p class="date" appdateexpired >{{ task.creationDate | date:'dd/MMM/yyyy' }}</p>
                         </div>
-                        <div class="actions">
-                            <button type="button" (click)="editThisTask(task)">
-                                <app-image-icon [imageSrc]="buttonEdit()" />Edit
+                        <div class="actions-vertical">
+                            <button type="button" class="tooltip" name="edit" 
+                                (click)="editThisTask(task)">
+                                <app-image-icon [imageSrc]="buttonEdit()" />
+                                <span class="tooltiptext">Edit this task</span>
                             </button>
-                            <button type="button" (click)="deleteThisTask(task)">
-                                <app-image-icon [imageSrc]="buttonDelete()" />Delete
+                            <button type="button" class="tooltip" name="delete" 
+                                (click)="deleteThisTask(task)">
+                                <app-image-icon [imageSrc]="buttonDelete()" />
+                                <span class="tooltiptext">Delete this task</span>
                             </button>
                         </div>
                     </li>

@@ -2,8 +2,10 @@
 :root {
   --primary-color: #002e51;
   --secondary-color: #4ed0e1;
-  --danger-color: #ff7043;
+  --contrast-color: #ff7043;
+  --contrast-light-color: #ffab92;
   --background-color: #e1f7fb;
+  --error-color: #ff0000;
   --opacity: 0.95;
 
   --red-to-pink-to-purple-vertical-gradient: linear-gradient(

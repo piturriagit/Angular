@@ -6,15 +6,20 @@ import { TasksService } from '../services/tasks-service';
 import { catchError } from 'rxjs';
 import { ImageIcon } from '../components/image-icon/image-icon';
 import { DatePipe } from '@angular/common';
+import { Feedback } from "../components/feedback/feedback";
 
 @Component({
   selector: 'app-home',
-  imports: [ReactiveFormsModule, ImageIcon, DatePipe],
+  imports: [ReactiveFormsModule, ImageIcon, DatePipe, Feedback],
   templateUrl: './home.html',
   styleUrl: './home.css'
 })
 export class Home {
   isLoading = signal(false);
+  loadingImage = signal("waiting.png");
+  loadingMessage = signal("Loading...");
+  nolistImage = signal("congrats.png");
+  nolistMessage = signal("You are up to date!!");
   isFormVisible = signal(false);
   buttonAdd = signal('bt_add.png');
   buttonEdit = signal('bt_edit.png');

@@ -7,7 +7,7 @@
     color: var(--background-color);
     opacity: var(--opacity);
     border-style: solid;
-    border-color: var(--danger-color);
+    border-color: var(--contrast-color);
     border-width: 0.2em;
     border-radius: 2em;
 
