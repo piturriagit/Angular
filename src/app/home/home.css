@@ -1,8 +1,65 @@
 .container {
+    background-color: yellow;
     display: flex;
     flex-direction: column;
     justify-content: start;
     align-items: left;
     gap: 0.5em;
     padding: 1em 0;
+}
+button {
+    /* background-color: transparent; */
+    border-style: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap:1em;
+}
+.top {
+    background-color: magenta;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 2em;
+    padding: 0 1em;
+    gap:1em;
+}
+.card {
+    display: grid;
+    grid-template-columns: auto 2em;    
+    border-style: solid;
+    border-width: 0.2em;
+    border-color: var(--primary-color);
+    border-radius: 2em;
+    background-color: var(--background-color);
+    height: 5em;
+    min-width: 18em;;
+}
+.content {
+    padding: 0.5em 1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 5em;
+    width: 100%;
+}
+.actions {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.1em;
+}
+form {
+    /* position: fixed;
+    top:5em;
+    z-index: 1; */
+    width: 80%;
+    background-color: var(--secondary-color);
+    padding: 1em;
+    border-style: solid;
+    border-width: 0.2em;
+    border-color: var(--primary-color);
+    border-radius: 2em;
 }

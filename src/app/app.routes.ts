@@ -8,15 +8,7 @@ export const routes: Routes = [
             return import('./home/home')
             .then(m => m.Home);
         }
-    }, 
-    {
-        path: 'edit',
-        loadComponent: () => {
-            return import('./edit/edit')
-            .then(m => m.Edit);
-        }
-    }, 
-    {
+    }, {
         path: 'error',
         loadComponent: () => {
             return import('./error/error')

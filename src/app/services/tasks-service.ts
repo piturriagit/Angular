@@ -7,12 +7,27 @@ import { HttpClient } from '@angular/common/http';
 })
 export class TasksService {
   http = inject(HttpClient);
-  getTasksFromApi() {
-    const url = `http://localhost:8080/tasks`;  //Enable CORS in backend if different ip:port!!
+  //http://localhost:8080/swagger-ui/index.html
+  //Enable CORS in backend when different ip:port!!
+
+  getTasks() {
+    const url = `http://localhost:8080/tasks`;
     return this.http.get<Array<Task>>(url);
   }
-  postTaskFromApi(task:Task) {
-    const url = `http://localhost:8080/tasks`;  //Enable CORS in backend if different ip:port!!
+  postTask(task:Task) {
+    const url = `http://localhost:8080/task`;
     return this.http.post<Array<Task>>(url, task);
+  }
+  putTask(task:Task) {
+    const url = `http://localhost:8080/task?id=${task.id}`;
+    return this.http.put<Array<Task>>(url, task);
+  }
+  deleteTask(id:number) {
+    const url = `http://localhost:8080/task?id=${id}`;
+    return this.http.delete(url);
+  }
+  deleteTasks() {
+    const url = `http://localhost:8080/tasks`;
+    return this.http.delete(url);
   }
 }
