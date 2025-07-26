@@ -17,6 +17,13 @@
 }
 
 /* CARD for every task */
+ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+    align-items: center;
+    gap: 1em;
+}
 .card {
     display: grid;
     grid-template-columns: auto 2em;    
@@ -25,16 +32,32 @@
     border-color: var(--primary-color);
     border-radius: 2em;
     background-color: var(--background-color);
-    height: 5em;
-    min-width: 18em;;
+    max-width: 100%;
+    min-height: 5em;
+    min-width: 10em;
 }
 .content {
     padding: 0.5em 1em;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 5em;
-    width: 100%;
+    gap: 0.3em;
+    overflow-x: auto;
+}
+.title {
+    color: var(--primary-color);
+    font-size: larger;
+    font-weight: 600;
+    text-align: left;
+}
+.details {
+    background-color: var(--background-color);
+    color: var(--primary-color)
+}
+.date {
+    color: var(--contrast-color);
+    text-align: right;
+    font-size: x-small;
 }
 
 /* FORM */
