@@ -36,11 +36,6 @@
                             <app-image-icon [imageSrc]="buttonSave()" />
                             <span class="tooltiptext">Save new task</span>
                         </button>
-                        <button type="reset" class="button-tooltip" name="reset"
-                            (click)="resetForm()">
-                            <app-image-icon [imageSrc]="buttonReset()" />
-                            <span class="tooltiptext">Reset form</span>
-                        </button>
                     } @else {
                         <button type="submit" class="button-tooltip" name="update" 
                             (click)="updateTask()" [disabled]="form.invalid">
