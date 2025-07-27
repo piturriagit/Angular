@@ -11,23 +11,23 @@ export class TasksService {
   //Enable CORS in backend when different ip:port!!
 
   getTasks() {
-    const url = `http://localhost:8080/tasks`;
+    const url = `http://localhost:8080/v1.0/tasks`;
     return this.http.get<Array<Task>>(url);
   }
   postTask(task:Task) {
-    const url = `http://localhost:8080/task`;
+    const url = `http://localhost:8080/v1.0/tasks`;
     return this.http.post<Array<Task>>(url, task);
   }
   putTask(task:Task) {
-    const url = `http://localhost:8080/task?id=${task.id}`;
+    const url = `http://localhost:8080/v1.0/tasks/${task.id}`;
     return this.http.put<Array<Task>>(url, task);
   }
   deleteTask(id:number) {
-    const url = `http://localhost:8080/task?id=${id}`;
+    const url = `http://localhost:8080/v1.0/tasks/${id}`;
     return this.http.delete(url);
   }
   deleteTasks() {
-    const url = `http://localhost:8080/tasks`;
+    const url = `http://localhost:8080/v1.0/tasks`;
     return this.http.delete(url);
   }
 }
