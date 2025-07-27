@@ -62,15 +62,16 @@ ul {
 
 /* FORM */
 form {
-    position: fixed;        /* modal form */
+    position: relative;        /* modal form */
     top:7em;
-    left: 6em;
     z-index: 1;
     width: 80%;
+    max-width: 60em;        /* empty margins for desktop */
     display: flex;
     flex-direction: column;
     background-color: var(--contrast-light-color);
     padding: 1em;
+    gap: 0.3em;
     border-style: solid;
     border-width: 0.2em;
     border-color: var(--primary-color);
@@ -81,11 +82,20 @@ label {
     align-items: center;
     gap: 1em;
 }
+input, textarea {
+    resize: none;
+    border-radius: 1em;
+    border: 2px solid var(--background-color);
+    padding: 0.5em
+}
 .warning {
     font-size: 0.6em;
 }
 .error {
     color: var(--error-color);
+}
+input.ng-invalid.ng-touched , input.ng-invalid.ng-dirty {
+  border: 2px solid var(--error-color);
 }
 
 /* BUTTONS */

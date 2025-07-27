@@ -7,6 +7,7 @@ import { Component, input } from '@angular/core';
   styleUrl: './image-icon.css'
 })
 export class ImageIcon {
-  imageSrc = input('bt_search.png');
+  imageSrc = input('');
+  imageAlt = input('');
   clickFunction = input('console.error("You made a mistake");');
 }

@@ -23,12 +23,18 @@ export class Home {
   isFormVisible = signal(false);
   isNew = signal(true);
   buttonAdd = signal('bt_add.png');
+  altAdd = signal('Add new task');
   buttonEdit = signal('bt_edit.png');
+  altEdit = signal('Edit this task');
   buttonDelete = signal('bt_delete.png');
+  altDelete = signal('Delete this task');
   buttonDeleteAll = signal('bt_delete2.png');
+  altDeleteAll = signal('Delete all tasks!!');
   buttonSave = signal('bt_save.png');
-  buttonReset = signal('bt_reset.png');
+  altSaveAdd = signal('Save new task');
+  altSaveEdit = signal('Update task');
   buttonCancel = signal('bt_cancel.png');
+  altCancel = signal('Close');
 
   minChars = signal(3);
   maxChars = signal(255); //max on database
@@ -65,7 +71,6 @@ export class Home {
     this.showForm();
   }
   resetForm() {
-    debugger;
     this.task.title='';
     this.task.description='';
     this.task.creationDate=new Date();
