@@ -59,7 +59,7 @@ a:hover {
   /* Position the tooltip */
   position: absolute;
   z-index: 2;
-  top: 100%;
+  top: 110%;
   left: 50%;
   margin-left: -60px;
 }

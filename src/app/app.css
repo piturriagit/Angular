@@ -5,9 +5,11 @@
     'main'
     'footer'
     ;
-    grid-template-rows: auto auto 2em;
+    grid-template-rows: 5em auto 2em;
     height: 100%;
     padding: 1em;
+    max-width: 60em;        /* empty margins for desktop */
+    margin: 0 0;
 }
 header {
     grid-area: header;
@@ -23,4 +25,15 @@ footer {
     grid-area: footer;
     position: sticky;
     bottom:0;
+}
+@media screen and (min-width: 900px) {
+    .container {
+        margin: 0 auto;     /* empty margins for desktop */
+
+    }
+}
+@media screen and (max-width: 540px) {
+    .container {
+        grid-template-rows: 5em auto 4em;      /* increase footer height */
+    }
 }
