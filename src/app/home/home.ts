@@ -93,7 +93,7 @@ export class Home {
     this.service.getTasks()
       .pipe(catchError(error => {
         console.error(`ERROR while GET tasks: ${error}`);
-        this.router.navigate(['/error']);
+//        this.router.navigate(['/error']);
         throw error;
       } ))
       .subscribe( (res:any) => {
@@ -106,7 +106,7 @@ export class Home {
     this.service.postTask(this.task)
       .pipe(catchError(error => {
         console.error(`ERROR while POST task ${this.task.title}: ${error}`);
-        this.router.navigate(['/error']);
+//        this.router.navigate(['/error']);
         throw error;
       } ))
       .subscribe( (res:any) => {
@@ -120,7 +120,7 @@ export class Home {
     this.service.putTask(this.task)
       .pipe(catchError(error => {
         console.error(`ERROR while PUT task ${this.task.title}: ${error}`);
-        this.router.navigate(['/error']);
+//        this.router.navigate(['/error']);
         throw error;
       } ))
       .subscribe( (res:any) => {
@@ -138,7 +138,7 @@ export class Home {
     this.service.deleteTask(item.id)
       .pipe(catchError(error => {   
         console.error(`ERROR while DELETE task ${item.title}: ${error}`);
-        this.router.navigate(['/error']);
+//        this.router.navigate(['/error']);
         throw error;
       } ))
       .subscribe( (res:any) => {
@@ -155,7 +155,7 @@ export class Home {
     this.service.deleteTasks()
       .pipe(catchError(error => {   
         console.error(`ERROR while DELETE tasks: ${error}`);
-        this.router.navigate(['/error']);
+//        this.router.navigate(['/error']);
         throw error;
       } ))
       .subscribe( (res:any) => {
