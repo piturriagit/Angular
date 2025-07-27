@@ -19,3 +19,35 @@ img {
 .contact {
     font-size: 0.5em;
 }
+@media screen and (max-width: 540px) {
+    img {
+        height:6em;
+    }
+    .title {
+        font-size: 2em;
+    }
+    .message {
+        font-size: 1em;
+    }
+    .contact {
+        font-size: 0.5em;
+    }
+}
+@media screen and (max-height: 500px) {
+    .container{
+        padding: 0;
+    }
+    img {
+        height:6em;
+    }
+    .title {
+        font-size: 2em;
+        padding: 0;
+    }
+    .message {
+        font-size: 1em;
+    }
+    .contact {
+        font-size: 0.5em;
+    }
+}

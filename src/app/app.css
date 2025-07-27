@@ -7,9 +7,9 @@
     ;
     grid-template-rows: 5em auto 2em;
     height: 100%;
-    padding: 1em;
+    padding: 1em 0em;
     max-width: 60em;        /* empty margins for desktop */
-    margin: 0 0;
+    margin: 0em;
 }
 header {
     grid-area: header;
