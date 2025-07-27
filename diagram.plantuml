@@ -1,0 +1,60 @@
+@startuml
+
+package app <<folder>> {
+  class App
+  class Routes
+  package pages <<Rectangle>> {
+    class Home
+    class Error
+  }
+App --> Routes
+Routes ..> Home
+Home ..> Error
+Routes ..> Error
+Error ..> Routes
+  package components <<folder>> {
+    class Header {
+      - appName : input()
+    }
+    class Footer {
+      - author : input
+      - authorContact : input
+      - imageMail : signal
+      - altMail : signal
+      - authorLinkedin : input
+      - imageLinkedin : signal
+      - altLinkedin : signal
+      - today : input
+    }
+    class ImageIcon {
+      - imageSrc : input
+      - imageAlt : input
+      - clickFunction : input
+    }
+    class Feedback {
+      - image : input
+      - title : input
+      - message : input
+      - warning : input
+      - link : input
+    }
+  }
+  package services <<folder>> {
+    class TasksService {
+      - getTasks() : Observable<>
+      - postTask(Task) : Obaservable<>
+      - putTask(Task) : Observable<Task>
+      - deleteTask(number) : Observable
+      - deleteTasks() : Observable<>
+    }
+  }
+  package model <<folder>> {
+    class Task {
+      - id : number
+      - title : string
+      - description : string
+      - creationDate : Date
+    }
+  }
+}
+@enduml
