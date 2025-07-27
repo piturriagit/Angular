@@ -21,6 +21,7 @@ export class Home {
   nolistImage = signal("congrats.png");
   nolistMessage = signal("You are up to date!!");
   isFormVisible = signal(false);
+  isNew = signal(true);
   buttonAdd = signal('bt_add.png');
   buttonEdit = signal('bt_edit.png');
   buttonDelete = signal('bt_delete.png');
@@ -31,17 +32,11 @@ export class Home {
 
   minChars = signal(3);
   maxChars = signal(255); //max on database
-  private emptyTask: Task = {id:0, title:"", description:"", creationDate:new Date()};
   form: FormGroup = new FormGroup({
-    id : new FormControl(this.emptyTask.id, [
-      Validators.required
-    ]),
-    title : new FormControl(this.emptyTask.title,[
-      Validators.required,
-      Validators.minLength(this.minChars())
-    ]),
-    description : new FormControl(this.emptyTask.description),
-    creationDate : new FormControl(this.emptyTask.creationDate)
+    id : new FormControl(0, [Validators.required]),
+    title : new FormControl('',[Validators.required,Validators.minLength(this.minChars())]),
+    description : new FormControl(''),
+    creationDate : new FormControl(new Date())
   });
 
   //Validators.email, Validators.pattern("")
@@ -57,6 +52,36 @@ export class Home {
     this.form.controls['id'].disable();
     this.loadTasksList();
   };
+  newTask() {
+    this.isNew.set(true);
+    this.resetForm();
+    this.isFormVisible.update( isFormVisible => !isFormVisible);
+  }
+  editThisTask(item: any) {
+    this.task.id=item.id;
+    this.task.title=item.title;
+    this.task.description=item.description;
+    this.isNew.set(false);
+    this.showForm();
+  }
+  resetForm() {
+    debugger;
+    this.task.title='';
+    this.task.description='';
+    this.task.creationDate=new Date();
+    this.form.controls['title'].markAsUntouched();
+    this.form.controls['title'].markAsPristine();
+  }
+  cancel() {
+    this.loadTasksList();
+    this.hideForm();
+  };
+  hideForm() {
+    this.isFormVisible.set(false);
+  }
+  showForm() {
+    this.isFormVisible.set(true);
+  }
 
   loadTasksList() {
     this.isLoading.set(true);
@@ -86,10 +111,6 @@ export class Home {
     });
   };
 
-  editThisTask(item: any) {
-    this.task=item;
-    this.showForm();
-  }
   updateTask() {
     this.service.putTask(this.task)
       .pipe(catchError(error => {
@@ -121,7 +142,7 @@ export class Home {
       });
   };
 
-  deleteList() {
+  deleteTasksList() {
     if (! confirm(`‼️ This will erase ALL your tasks! \nAre you sure you want to delete then?`) ) {
       console.log('Delete action cancel by user');
       return;
@@ -137,27 +158,4 @@ export class Home {
         this.loadTasksList();
       });
   };
-
-  resetTaks() {
-    this.task.id=this.emptyTask.id;
-    this.task.title=this.emptyTask.title;
-    this.task.description=this.emptyTask.description;
-    this.task.creationDate=this.emptyTask.creationDate;
-  }
-
-  cancel() {
-    this.loadTasksList();
-    this.hideForm();
-  };
-
-  hideForm() {
-    this.isFormVisible.set(false);
-  }
-  showForm() {
-    this.isFormVisible.set(true);
-  }
-  newTask() {
-    this.resetTaks();   //clean data in form (after save, cancel, edit...)
-    this.isFormVisible.update( isFormVisible => !isFormVisible);
-  }
 }

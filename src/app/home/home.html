@@ -1,12 +1,12 @@
 <div class="container">
     <div class="top">
-        <button class="tooltip" name="new" (click)="newTask()">
+        <button class="button-tooltip" name="new" (click)="newTask()">
             <app-image-icon [imageSrc]="buttonAdd()" />
             <span class="tooltiptext">New task</span>
         </button>
          @if(isFormVisible()) {
             <form [formGroup]="form">
-                @if (task.id != 0) {
+                @if ( !isNew() ) {
                     <label>ID <span class="warning error">*</span></label>
                     <input type="text" formControlName="id"
                         [(ngModel)]="task.id" name="id">    
@@ -15,37 +15,40 @@
                 <input type="text" formControlName="title"
                     [(ngModel)]="task.title" name="title"
                     maxlength="{{ maxChars() }}">
+                <div>
+                    @if( form.controls['title'].errors?.['required'] && 
+                        (form.controls['title'].touched && form.controls['title'].dirty) ) {
+                        <span class="warning error">Title is required</span>
+                    }
+                    {{ form.controls['title'].dirty }}
+                    @if(form.controls['title'].errors?.['minlength']) {
+                        <span class="warning error">Title requires min of {{ minChars() }} chars</span>
+                    }
+                </div>
                 <label>Description<span class="warning"> ({{ maxChars() - task.description.length }}) chars left</span></label>
                 <input type="text" formControlName="description"
                     [(ngModel)]="task.description" name="description"
                     maxlength="{{ maxChars() }}">
-                <div>
-                    @if(form.controls['title'].errors?.['required'] && form.controls['title'].touched && form.controls['title'].dirty) {
-                        <span class="error">Title is required</span>
-                    } @else if(form.controls['title'].errors?.['minlength']) {
-                        <span class="error">Title requires min of {{ minChars() }} chars</span>
-                    }
-                </div>
                 <div class="actions-horizontal">
-                    @if (task.id == 0) {
-                        <button type="submit" class="tooltip" name="add" 
+                    @if ( isNew() ) {
+                        <button type="submit" class="button-tooltip" name="add" 
                             (click)="addTask()" [disabled]="form.invalid">
                             <app-image-icon [imageSrc]="buttonSave()" />
                             <span class="tooltiptext">Save new task</span>
                         </button>
-                        <button type="reset" class="tooltip" name="reset" 
-                            (click)="resetTaks()">
+                        <button type="reset" class="button-tooltip" name="reset"
+                            (click)="resetForm()">
                             <app-image-icon [imageSrc]="buttonReset()" />
                             <span class="tooltiptext">Reset form</span>
                         </button>
                     } @else {
-                        <button type="submit" class="tooltip" name="update" 
+                        <button type="submit" class="button-tooltip" name="update" 
                             (click)="updateTask()" [disabled]="form.invalid">
                             <app-image-icon [imageSrc]="buttonSave()" />
                             <span class="tooltiptext">Update task</span>
                         </button>
                     }
-                    <button type="button" class="tooltip" name="cancel" 
+                    <button type="button" class="button-tooltip" name="cancel" 
                         (click)="cancel()">
                         <app-image-icon [imageSrc]="buttonCancel()" />
                         <span class="tooltiptext">Close</span>
@@ -53,7 +56,7 @@
                 </div>
             </form>
         }
-        <button name="clean" class="tooltip" (click)="deleteList()">
+        <button name="clean" class="button-tooltip" (click)="deleteTasksList()">
             <app-image-icon [imageSrc]="buttonDeleteAll()" />
             <span class="tooltiptext">Delete all tasks!!</span>
         </button>
@@ -70,15 +73,15 @@
                         <div class="content">
                             <p class="title">{{ task.title }}</p>
                             <p class="details">{{ task.description }}</p>
-                            <p class="date" appdateexpired >{{ task.id }} - {{ task.creationDate | date:'dd/MMM/yyyy' }}</p>
+                            <p class="date" appdateexpired >{{ task.id }} - {{ task.creationDate | date:'dd/MMM/yyyy hh:MM:ss' }}</p>
                         </div>
                         <div class="actions-vertical">
-                            <button type="button" class="tooltip" name="edit" 
+                            <button type="button" class="button-tooltip" name="edit" 
                                 (click)="editThisTask(task)">
                                 <app-image-icon [imageSrc]="buttonEdit()" />
                                 <span class="tooltiptext">Edit this task</span>
                             </button>
-                            <button type="button" class="tooltip" name="delete" 
+                            <button type="button" class="button-tooltip" name="delete" 
                                 (click)="deleteThisTask(task)">
                                 <app-image-icon [imageSrc]="buttonDelete()" />
                                 <span class="tooltiptext">Delete this task</span>

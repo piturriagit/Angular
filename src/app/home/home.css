@@ -63,8 +63,8 @@ ul {
 /* FORM */
 form {
     position: fixed;        /* modal form */
-    top:5em;
-    left: 5em;
+    top:7em;
+    left: 6em;
     z-index: 1;
     width: 80%;
     display: flex;
@@ -103,27 +103,20 @@ label {
     align-items: center;
     gap: 0.1em;
 }
-button {
+.button-tooltip {
     background-color: transparent;
     border-style: none;
     cursor: pointer;
     display: flex;
     align-items: center;
+    position: relative;
 }
-button:disabled {
+.button-tooltip:disabled {
     cursor: not-allowed;
-}
-button:disabled > img {
     opacity: 0.3;
 }
-button:disabled > .tooltiptext {
-    visibility: hidden;
-}
-.tooltip {
-  position: relative;
-  display: inline-block;
-}
-.tooltip .tooltiptext {
+
+.button-tooltip .tooltiptext {
   visibility: hidden;
   width: 8em;
   background-color: var(--contrast-color);
@@ -138,11 +131,14 @@ button:disabled > .tooltiptext {
   /* Position the tooltip */
   position: absolute;
   z-index: 2;
-  top: 100%;
+  top: 110%;
   left: 50%;
   margin-left: -60px;
 }
-.tooltip:hover .tooltiptext {
+.button-tooltip:hover .tooltiptext {
   visibility: visible;
   opacity: 1;
+}
+.button-tooltip:disabled .tooltiptext {
+  visibility: hidden;
 }
