@@ -1,0 +1,10 @@
+<div class="container">
+    <form #form="ngForm">
+        <input type="text" formControlName="username" [(ngModel)]="user.username" 
+            name="username" placeholder="user" required>
+        <input type="text" formControlName="password" [(ngModel)]="user.password" 
+            name="password" placeholder="u@123" required>
+        <button type="submit" name="login" 
+        (click)="login()" [disabled]="form.invalid">Login</button>
+    </form>
+</div>

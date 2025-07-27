@@ -9,6 +9,13 @@ export const routes: Routes = [
             .then(m => m.Home);
         }
     }, {
+        path: 'login',
+        pathMatch: 'full',
+        loadComponent: () => {
+            return import('./login/login')
+            .then(m => m.Login);
+        }
+    }, {
         path: 'error',
         loadComponent: () => {
             return import('./error/error')
