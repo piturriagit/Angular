@@ -3,12 +3,12 @@ import { AuthGuard } from './guards/auth-guard';
 import { Login } from './login/login';
 import { Home } from './home/home';
 import { Error } from './error/error';
-import { Notfound404 } from './notfound404/notfound404';
+import { PageNotFound } from './page-not-found/page-not-found';
 
 
 export const routes: Routes = [
-    { path: '', component: Home, canActivate: [AuthGuard] },
+    { path: '', pathMatch: 'full', component: Home, canActivate: [AuthGuard] },
     { path: 'login', component: Login },
     { path: 'error', component: Error , canActivate: [AuthGuard] },
-    { path: 'notfound', component: Notfound404 }
+    { path: '**', component: PageNotFound } // Ruta comodín para 404
 ];
