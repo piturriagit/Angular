@@ -13,6 +13,6 @@ export class Header {
   
   constructor(private authService: AuthService) { };
   authImage= signal('bt_auth.png');
-  authAlt= signal('Authentication');
+  authAlt= signal('Login');
   appName = input('Default app title');
 }
