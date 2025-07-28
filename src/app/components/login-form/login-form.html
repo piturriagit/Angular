@@ -1,16 +1,32 @@
 <div class="container">
-    <form #form="ngForm" (click)="login()">
+    <form #form="ngForm">
         <input type="text" 
-            [(ngModel)]="user.username"
+            [(ngModel)]="formUsername"
+            #name="ngModel"
             name="username" 
             placeholder="user" 
             required>
+        
         <input type="password" 
-            [(ngModel)]="user.password" 
+            [(ngModel)]="formPassword" 
             name="password" 
             placeholder="u@123" 
             required>
-        <button type="submit" name="login" 
-            [disabled]="form.invalid">Login</button>
+        @if(isRegister()) {
+            <button type="submit" name="login" 
+            [disabled]="form.invalid"
+            (click)="register()">Register</button>
+        } @else {
+            <button type="submit" name="login" 
+            [disabled]="form.invalid"
+            (click)="login()">Login</button>
+        }
+        @if(isLoggedIn()) {
+        
+            <button type="button" name="refresh">Refresh token</button>
+        
+            <button type="button" name="logout">Log out</button>
+        }
     </form>
+    <app-feedback [image]="resultImage()" [title]="resultTitle()" [message]="resultMessage()"/> 
 </div>
