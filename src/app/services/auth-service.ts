@@ -27,12 +27,18 @@ export class AuthService {
     return this.http.post<String>(url, username);
   }
 
-  storeToken(auth:AuthResponse) {
-    localStorage.setItem('ìd_token', auth.jwt);
-    localStorage.setItem('expires_at', auth.expiration);
+  userLogged() {
+    const loginData = localStorage.getItem('loginData');
+    if(loginData == null)
+      return '';
+    return JSON.parse(loginData).username;
   }
+
+  storeToken(loginData: any) {
+    localStorage.setItem('loginData', JSON.stringify(loginData));
+  }
+  
   deleteToken() {
-    localStorage.removeItem('ìd_token');
-    localStorage.removeItem('expires_at');
+    localStorage.removeItem('loginData');
   }
 }

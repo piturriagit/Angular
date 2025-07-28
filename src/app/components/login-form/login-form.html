@@ -12,21 +12,19 @@
             name="password" 
             placeholder="u@123" 
             required>
-        @if(isRegister()) {
-            <button type="submit" name="login" 
-            [disabled]="form.invalid"
-            (click)="register()">Register</button>
-        } @else {
-            <button type="submit" name="login" 
-            [disabled]="form.invalid"
-            (click)="login()">Login</button>
-        }
-        @if(isLoggedIn()) {
-        
-            <button type="button" name="refresh">Refresh token</button>
-        
-            <button type="button" name="logout">Log out</button>
+        @if(userLogged() !== '') {
+            <button type="button" name="logout" (click)="logout()">Log out</button>
+        } @else {
+            @if(isRegister()) {
+                <button type="submit" name="login" 
+                [disabled]="form.invalid"
+                (click)="register()">Register</button>
+            } @else {
+                <button type="submit" name="login" 
+                [disabled]="form.invalid"
+                (click)="login()">Login</button>
+            }
         }
     </form>
-    <app-feedback [image]="resultImage()" [title]="resultTitle()" [message]="resultMessage()"/> 
+    <app-feedback [image]="resultImage()" [title]="resultTitle()" [message]="resultMessage()" [warning]="resultWarning()"/> 
 </div>

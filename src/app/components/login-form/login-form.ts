@@ -1,4 +1,4 @@
-import { Component, input, signal } from '@angular/core';
+import { Component, input, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { User } from '../../model/user.type';
 import { catchError } from 'rxjs';
@@ -13,9 +13,9 @@ import { AuthResponse } from '../../model/authResponse.type';
   templateUrl: './login-form.html',
   styleUrl: './login-form.css'
 })
-export class LoginForm {
+export class LoginForm implements OnInit {
   isRegister = input(false);
-  isLoggedIn = signal(false);
+  userLogged = signal('');
   formUsername = '';
   formPassword = '';
   resultImage = signal('');
@@ -28,8 +28,12 @@ export class LoginForm {
 
   constructor(private authService: AuthService) { };
   
+  ngOnInit(): void {
+      this.userLogged.set(this.authService.userLogged());
+  }
+
   register() {
-    console.log(`login (${this.formUsername}, ${this.formPassword})... `);
+    console.log(`register (${this.formUsername}, ${this.formPassword})... `);
     this.user.username=this.formUsername;
     this.user.password=this.formPassword;
     this.authService.login(this.user)
@@ -44,10 +48,11 @@ export class LoginForm {
       .subscribe( (res:any) => {
         this.auth=res;
         this.authService.storeToken(res);     //Store token in browser
+        this.userLogged.set(this.user.username);
         console.log(`POST register: ${res}`);
         this.resultImage.set('bt_login.png');
-        this.resultTitle.set('Register Successful');
-        this.resultMessage.set(`Wellcome ${this.user.username}, your token expires at ${res.expiration}`);   //print expiration
+        this.resultTitle.set(`Wellcome ${this.user.username}`);
+        this.resultMessage.set(`Your token expires at ${res.expiration}`);   //print expiration
         this.resultWarning.set(res.jwt);      //print token
     });
   };
@@ -68,18 +73,25 @@ export class LoginForm {
       .subscribe( (res:any) => {
         this.auth=res;
         this.authService.storeToken(res)     //Store token in browser
+        this.userLogged.set(this.user.username);
         console.log(`POST login: ${res}`);
         this.resultImage.set('bt_login.png');
-        this.resultTitle.set('Login Successful');
-        this.resultMessage.set(`Hello ${this.user.username}, your token expires at ${res.expiration}`);   //print expiration
+        this.resultTitle.set(`Hello ${this.user.username}`);
+        this.resultMessage.set(`Your token expires at ${res.expiration}`);   //print expiration
         this.resultWarning.set(res.jwt);      //print token
     });
   };
 
   logout() {
     console.log(`logout (${this.formUsername}... `);
+    this.authService.deleteToken();        //Remove token from browser
+    this.userLogged.set('');
     this.user.username=this.formUsername;
-    this.authService.logout(this.user.username)
+            this.resultImage.set('bt_logout.png');
+        this.resultTitle.set('Logout Successful');
+        this.resultMessage.set(`Bye ${this.user.username}!`);
+        this.resultWarning.set('');
+/*    this.authService.logout(this.user.username)
       .pipe(catchError(error => {
         console.error(`ERROR while LOGOUT ${this.user.username}: ${error}`);
         this.resultImage.set('sorry.png');
@@ -90,12 +102,12 @@ export class LoginForm {
       } ))
       .subscribe( (res:any) => {
         this.auth=res;
-        this.authService.deleteToken();        //Remove token from browser
         console.log(`POST logout: ${res}`);
         this.resultImage.set('bt_logout.png');
         this.resultTitle.set('Logout Successful');
         this.resultMessage.set(`Bye ${this.user.username}!`);
         this.resultWarning.set('');
     });
+    */
   };
 }
