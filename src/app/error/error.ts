@@ -16,8 +16,8 @@ export class Error {
   protected readonly warning = signal('You can also create a ticket if you need additional help with this');
   
   constructor(private router: Router) {
-//    setTimeout(()=> {
-//      this.router.navigate(['/']);
-//    }, 1000 * 3600);    //try to redirect to main page every 1 hour
+    setTimeout(()=> {
+      this.router.navigate(['/']);
+    }, 1000 * 3600);    //try to redirect to main page every 1 hour
   }
 }

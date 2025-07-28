@@ -1,15 +1,14 @@
-import { Component, OnInit, signal } from '@angular/core';
-import { LoginForm } from '../components/login-form/login-form';
+import { Component, signal } from '@angular/core';
 import { User } from '../model/user.type';
 import { AuthResponse } from '../model/authResponse.type';
 import { AuthService } from '../services/auth-service';
-import { catchError } from 'rxjs';
-import { Feedback } from "../components/feedback/feedback";
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { UserService } from '../services/user-service';
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule, Feedback],
+  imports: [FormsModule],
   templateUrl: './login.html',
   styleUrl: './login.css'
 })
@@ -19,14 +18,14 @@ export class Login {
   alternate = [this.label[1], this.label[0]];
   isRegister = signal(0);
   feedback = signal(''); 
-  userLogged = signal('');
   formUsername = '';
   formPassword = '';
 
   user : User = { username:'', password:''};
   auth : AuthResponse = { "username": '', jwt: '', expiration : ''}
 
-  constructor(private authService: AuthService) { };
+  constructor(private userService: UserService, private authService: AuthService, 
+    private router: Router) { };
    
   onAlternate() {
     this.isRegister.set(this.isRegister() === 0 ? 1 : 0);
@@ -36,16 +35,20 @@ export class Login {
     console.log(`register (${this.formUsername}, ${this.formPassword})... `);
     this.user.username=this.formUsername;
     this.user.password=this.formPassword;
-    this.authService.login(this.user)
-      .pipe(catchError(error => {
-        console.error(`ERROR while REGISTRATION ${this.user.username}: ${error}`);
-        throw error;
-      } ))
-      .subscribe( (res:any) => {
-        this.auth=res;
-        this.authService.storeToken(res);     //Store token in browser
-        this.userLogged.set(this.user.username);
-        console.log(`POST register: ${res}`);
+    this.authService.register(this.user).subscribe({
+      next: data => { 
+        this.authService.storeToken(data);     //Store token in browser
+        this.userService.updateUser(this.user.username);
+        console.log(`POST register: ${JSON.stringify(data)}`);
+        this.router.navigate(['/']);
+      },
+      error: error => {
+        if(error.status == 409)
+          this.feedback.set('* Try with a different username');
+        else
+          this.router.navigate(['error']);
+        console.log('HTTP error code:', error.status);
+      }
     });
   };
 
@@ -53,41 +56,20 @@ export class Login {
     console.log(`login (${this.formUsername}, ${this.formPassword})... `);
     this.user.username=this.formUsername;
     this.user.password=this.formPassword;
-    this.authService.login(this.user)
-      .pipe(catchError(error => {
-        console.error(`ERROR while LOGIN ${this.user.username}: ${error}`);
-        throw error;
-      } ))
-      .subscribe( (res:any) => {
-        this.auth=res;
-        this.authService.storeToken(res)     //Store token in browser
-        this.userLogged.set(this.user.username);
-        console.log(`POST login: ${res}`);
-    });
-  };
-
-  onLogout() {
-    console.log(`logout (${this.formUsername}... `);
-    this.authService.deleteToken();        //Remove token from browser
-    this.userLogged.set('');
-    this.user.username=this.formUsername;
-/*    this.authService.logout(this.user.username)
-      .pipe(catchError(error => {
-        console.error(`ERROR while LOGOUT ${this.user.username}: ${error}`);
-        this.resultImage.set('sorry.png');
-        this.resultTitle.set('Logout Error');
-        this.resultMessage.set('');
-        this.resultWarning = signal('');
-        throw error;
-      } ))
-      .subscribe( (res:any) => {
-        this.auth=res;
-        console.log(`POST logout: ${res}`);
-        this.resultImage.set('bt_logout.png');
-        this.resultTitle.set('Logout Successful');
-        this.resultMessage.set(`Bye ${this.user.username}!`);
-        this.resultWarning.set('');
-    });
-    */
+    this.authService.login(this.user).subscribe({
+      next: data => { 
+        this.authService.storeToken(data);     //Store token in browser
+        this.userService.updateUser(this.user.username);
+        console.log(`POST login: ${JSON.stringify(data)}`);
+        this.router.navigate(['/']);
+      },
+      error: error => {
+        if(error.status == 401)
+          this.feedback.set('* Erroneous user and/or password');
+        else 
+          this.router.navigate(['error']);
+        console.log('HTTP error code:', error.status);
+      }
+    }); 
   };
 }

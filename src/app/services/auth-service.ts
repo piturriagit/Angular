@@ -34,11 +34,19 @@ export class AuthService {
     return JSON.parse(loginData).username;
   }
 
+  isLoggedIn() {
+    const loginData = localStorage.getItem('loginData');
+    if(loginData == null)
+      return false;
+    return true;
+  }
+
   storeToken(loginData: any) {
     localStorage.setItem('loginData', JSON.stringify(loginData));
   }
   
   deleteToken() {
+
     localStorage.removeItem('loginData');
   }
 }

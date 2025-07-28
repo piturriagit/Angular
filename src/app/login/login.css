@@ -32,14 +32,20 @@ button {
     border-width: 0.2em;
     border-color: var(--primary-color);
     border-radius: 2em;
+    color: var(--primary-color);
+    font-weight: 600;
 }
 button:disabled {
     cursor: inherit;
 }
-.button-login {
+.button:disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+.login {
     background-color: var(--secondary-color);
 }
-.button-register {
+.register {
     background-color: var(--contrast-color);
 }
 .alternate {
@@ -48,4 +54,8 @@ button:disabled {
 .alternate > span {
     text-decoration: dotted underline;
     cursor: pointer;
+}
+.error {
+    font-size: 0.6em;
+    color: var(--error-color);
 }

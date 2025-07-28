@@ -15,13 +15,13 @@
             placeholder="u@123" 
             required>
         </label>
-        <span>{{ feedback() }}</span>
+        <span class="error">{{ feedback() }}</span>
         @if(isRegister()) {
-            <button class="button-register" type="submit" name="login" 
+            <button class="button register" type="submit" name="login" 
             [disabled]="form.invalid"
             (click)="onRegister()">{{ label[isRegister()] }}</button>
         } @else {
-            <button class="button-login" type="submit" name="login" 
+            <button class="button login" type="submit" name="login" 
             [disabled]="form.invalid"
             (click)="onLogin()">{{ label[isRegister()] }}</button>
         }

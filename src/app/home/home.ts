@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Task } from '../model/task.type';
 import { Router } from '@angular/router';
@@ -14,7 +14,7 @@ import { Feedback } from "../components/feedback/feedback";
   templateUrl: './home.html',
   styleUrl: './home.css'
 })
-export class Home {
+export class Home implements OnInit {
   isLoading = signal(false);
   loadingImage = signal("waiting.png");
   loadingMessage = signal("Loading...");
@@ -45,7 +45,6 @@ export class Home {
     creationDate : new FormControl(new Date())
   });
 
-  //Validators.email, Validators.pattern("")
   tasksList: Array<Task> = [];
   task: Task = {
     id : 0,
@@ -56,8 +55,13 @@ export class Home {
 
   constructor(private router: Router, private service: TasksService) { 
     this.form.controls['id'].disable();
-    this.loadTasksList();
   };
+
+  ngOnInit(): void {
+        debugger
+    this.loadTasksList();
+  }
+
   newTask() {
     this.isNew.set(true);
     this.resetForm();
@@ -78,7 +82,6 @@ export class Home {
     this.form.controls['title'].markAsPristine();
   }
   cancel() {
-    this.loadTasksList();
     this.hideForm();
   };
   hideForm() {
@@ -93,7 +96,7 @@ export class Home {
     this.service.getTasks()
       .pipe(catchError(error => {
         console.error(`ERROR while GET tasks: ${error}`);
-//        this.router.navigate(['/error']);
+        this.router.navigate(['/error']);
         throw error;
       } ))
       .subscribe( (res:any) => {
@@ -106,7 +109,7 @@ export class Home {
     this.service.postTask(this.task)
       .pipe(catchError(error => {
         console.error(`ERROR while POST task ${this.task.title}: ${error}`);
-//        this.router.navigate(['/error']);
+        this.router.navigate(['/error']);
         throw error;
       } ))
       .subscribe( (res:any) => {
@@ -120,7 +123,7 @@ export class Home {
     this.service.putTask(this.task)
       .pipe(catchError(error => {
         console.error(`ERROR while PUT task ${this.task.title}: ${error}`);
-//        this.router.navigate(['/error']);
+        this.router.navigate(['/error']);
         throw error;
       } ))
       .subscribe( (res:any) => {
@@ -131,14 +134,10 @@ export class Home {
   };
 
   deleteThisTask(item:any) {
-    if (! confirm(`⚠️ Are you sure you want to delete the task: ${item.title}?`) ) {
-      console.log('Delete action cancel by user');
-      return;
-    }
     this.service.deleteTask(item.id)
       .pipe(catchError(error => {   
         console.error(`ERROR while DELETE task ${item.title}: ${error}`);
-//        this.router.navigate(['/error']);
+        this.router.navigate(['/error']);
         throw error;
       } ))
       .subscribe( (res:any) => {
@@ -155,7 +154,7 @@ export class Home {
     this.service.deleteTasks()
       .pipe(catchError(error => {   
         console.error(`ERROR while DELETE tasks: ${error}`);
-//        this.router.navigate(['/error']);
+        this.router.navigate(['/error']);
         throw error;
       } ))
       .subscribe( (res:any) => {
