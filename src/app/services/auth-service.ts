@@ -14,6 +14,7 @@ export class AuthService {
   private loggedUser = new BehaviorSubject<string>(this.userLogged());
   loggedUser$ = this.loggedUser.asObservable();
   
+  //LOCAL STORAGE: loginData
   updateUser(user: string) {
     this.loggedUser.next(user);
   }
@@ -32,6 +33,7 @@ export class AuthService {
     return true;
   }
 
+  //API
   //http://localhost:8080/swagger-ui/index.html
   //Enable CORS in backend when different ip:port!!
   //configuration.addAllowedOrigin("http://localhost:4200");
