@@ -27,7 +27,7 @@ export class Home implements OnInit {
   altEdit = signal('Edit this task');
   buttonDelete = signal('bt_delete.png');
   altDelete = signal('Delete this task');
-  buttonDeleteAll = signal('bt_delete2.png');
+  buttonDeleteAll = signal('bt_deleteAll.png');
   altDeleteAll = signal('Delete all tasks!!');
   buttonSave = signal('bt_save.png');
   altSaveAdd = signal('Save new task');
