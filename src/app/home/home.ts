@@ -93,73 +93,76 @@ export class Home implements OnInit {
 
   loadTasksList() {
     this.isLoading.set(true);
-    this.service.getTasks()
-      .pipe(catchError(error => {
-        console.error(`ERROR while GET tasks: ${error}`);
-        this.router.navigate(['/error']);
-        throw error;
-      } ))
-      .subscribe( (res:any) => {
-        this.tasksList=res;
-        console.log(`GET tasks: ${res}`);
+    this.service.getTasks().subscribe({
+      next: data => { 
+        this.tasksList=data;
         this.isLoading.set(false);
-    })
+        console.log('GET tasks: ' + data.length + ' items');
+      },
+      error: error => {
+        this.router.navigate(['error']);
+        console.log('GET tasks error:' + error.status);
+      }
+    });
   }
+
   addTask() {
-    this.service.postTask(this.task)
-      .pipe(catchError(error => {
-        console.error(`ERROR while POST task ${this.task.title}: ${error}`);
-        this.router.navigate(['/error']);
-        throw error;
-      } ))
-      .subscribe( (res:any) => {
-        console.log(`POST task ${this.task.title}: ${res}`);
+    this.service.postTask(this.task).subscribe({
+      next: data => { 
         this.loadTasksList();
         this.hideForm();
+        console.log('POST tasks: ' + JSON.stringify(data));
+      },
+      error: error => {
+        this.router.navigate(['error']);
+        console.log('POST tasks error:' + error.status 
+          + '\nData: ' +  JSON.stringify(this.task));
+      }
     });
-  };
+  }
 
   updateTask() {
-    this.service.putTask(this.task)
-      .pipe(catchError(error => {
-        console.error(`ERROR while PUT task ${this.task.title}: ${error}`);
-        this.router.navigate(['/error']);
-        throw error;
-      } ))
-      .subscribe( (res:any) => {
-        console.log(`PUT task ${this.task.id}-${this.task.title}: ${res}`);
+    this.service.putTask(this.task).subscribe({
+      next: data => { 
         this.loadTasksList();
         this.hideForm();
-      });
-  };
+        console.log('PUT tasks/' + this.task.id + ': ' + JSON.stringify(data));
+      },
+      error: error => {
+        this.router.navigate(['error']);
+        console.log('PUT tasks/' + this.task.id + ' error:' + error.status 
+          + '\nData: ' +  JSON.stringify(this.task));
+      }
+    });
+  }
 
   deleteThisTask(item:any) {
-    this.service.deleteTask(item.id)
-      .pipe(catchError(error => {   
-        console.error(`ERROR while DELETE task ${item.title}: ${error}`);
-        this.router.navigate(['/error']);
-        throw error;
-      } ))
-      .subscribe( (res:any) => {
-        console.log(`DELETE task ${item.id}-${item.title}: ${res}`);
+    this.service.deleteTask(item.id).subscribe({
+      next: data => { 
         this.loadTasksList();
-      });
-  };
+        console.log('DELETE tasks/' + item.id + ': ' + JSON.stringify(data));
+      },
+      error: error => {
+        this.router.navigate(['error']);
+        console.log('DELETE tasks/' + item.id + ' error:' + error.status);
+      }
+    });
+  }
 
   deleteTasksList() {
     if (! confirm(`‼️ This will erase ALL your tasks! \nAre you sure you want to delete then?`) ) {
       console.log('Delete action cancel by user');
       return;
     }
-    this.service.deleteTasks()
-      .pipe(catchError(error => {   
-        console.error(`ERROR while DELETE tasks: ${error}`);
-        this.router.navigate(['/error']);
-        throw error;
-      } ))
-      .subscribe( (res:any) => {
-        console.log(`DELETE tasks: ${res}`);
+    this.service.deleteTasks().subscribe({
+      next: data => { 
         this.loadTasksList();
-      });
-  };
+        console.log('DELETE tasks');
+      },
+      error: error => {
+        this.router.navigate(['error']);
+        console.log('DELETE tasks error:' + error.status);
+      }
+    });
+  }
 }
