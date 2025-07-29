@@ -3,7 +3,6 @@ import { FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { Task } from '../model/task.type';
 import { Router } from '@angular/router';
 import { TasksService } from '../services/tasks-service';
-import { catchError } from 'rxjs';
 import { ImageIcon } from '../components/image-icon/image-icon';
 import { DatePipe } from '@angular/common';
 import { Feedback } from "../components/feedback/feedback";
