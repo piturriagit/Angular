@@ -2,6 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { User } from '../model/user.type';
 import { HttpClient } from '@angular/common/http';
 import { AuthResponse } from '../model/authResponse.type';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,8 +10,31 @@ import { AuthResponse } from '../model/authResponse.type';
 
 export class AuthService {
   http = inject(HttpClient);
+
+  private loggedUser = new BehaviorSubject<string>(this.userLogged());
+  loggedUser$ = this.loggedUser.asObservable();
+  
+  updateUser(user: string) {
+    this.loggedUser.next(user);
+  }
+
+  userLogged() {
+    const loginData = localStorage.getItem('loginData');
+    if(loginData == null)
+      return '';
+    return JSON.parse(loginData).username;
+  }
+
+  isLoggedIn() {
+    const loginData = localStorage.getItem('loginData');
+    if(loginData == null)
+      return false;
+    return true;
+  }
+
   //http://localhost:8080/swagger-ui/index.html
   //Enable CORS in backend when different ip:port!!
+  //configuration.addAllowedOrigin("http://localhost:4200");
 
   register(user : User) {
     const url = `http://localhost:8080/auth/register`;
@@ -27,19 +51,7 @@ export class AuthService {
     return this.http.post<String>(url, username);
   }
 
-  userLogged() {
-    const loginData = localStorage.getItem('loginData');
-    if(loginData == null)
-      return '';
-    return JSON.parse(loginData).username;
-  }
 
-  isLoggedIn() {
-    const loginData = localStorage.getItem('loginData');
-    if(loginData == null)
-      return false;
-    return true;
-  }
 
   storeToken(loginData: any) {
     localStorage.setItem('loginData', JSON.stringify(loginData));

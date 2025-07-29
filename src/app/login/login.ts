@@ -4,7 +4,6 @@ import { AuthResponse } from '../model/authResponse.type';
 import { AuthService } from '../services/auth-service';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserService } from '../services/user-service';
 
 @Component({
   selector: 'app-login',
@@ -24,7 +23,7 @@ export class Login {
   user : User = { username:'', password:''};
   auth : AuthResponse = { "username": '', jwt: '', expiration : ''}
 
-  constructor(private userService: UserService, private authService: AuthService, 
+  constructor(private authService: AuthService, 
     private router: Router) { };
    
   onAlternate() {
@@ -38,7 +37,7 @@ export class Login {
     this.authService.register(this.user).subscribe({
       next: data => { 
         this.authService.storeToken(data);     //Store token in browser
-        this.userService.updateUser(this.user.username);
+        this.authService.updateUser(this.user.username);
         console.log(`POST register: ${JSON.stringify(data)}`);
         this.router.navigate(['/']);
       },
@@ -59,7 +58,7 @@ export class Login {
     this.authService.login(this.user).subscribe({
       next: data => { 
         this.authService.storeToken(data);     //Store token in browser
-        this.userService.updateUser(this.user.username);
+        this.authService.updateUser(this.user.username);
         console.log(`POST login: ${JSON.stringify(data)}`);
         this.router.navigate(['/']);
       },

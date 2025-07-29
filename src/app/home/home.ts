@@ -74,6 +74,7 @@ export class Home implements OnInit {
     this.showForm();
   }
   resetForm() {
+    this.task.id=0;
     this.task.title='';
     this.task.description='';
     this.task.creationDate=new Date();

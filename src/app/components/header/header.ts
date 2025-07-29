@@ -2,7 +2,6 @@ import { Component, input, OnInit, signal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { ImageIcon } from "../image-icon/image-icon";
 import { AuthService } from '../../services/auth-service';
-import { UserService } from '../../services/user-service';
 
 @Component({
   selector: 'app-header',
@@ -17,13 +16,13 @@ export class Header implements OnInit {
   appName = input('');
   loggedUser = '';
 
-  constructor(private userService: UserService, private authService: AuthService, 
-    private router: Router) { }
+  constructor(private authService: AuthService, 
+    private router: Router) { 
+  }
 
   ngOnInit(): void {
-    this.userService.loggedUser$.subscribe(user => {
+    this.authService.loggedUser$.subscribe(user => {
       this.loggedUser = user;
-      console.log("oido cocina");
     });
   }
 
